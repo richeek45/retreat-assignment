@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { Button } from "@/components/ui/button"
 import './App.css'
 
 const getRetreats = async () => {
@@ -22,9 +23,19 @@ function App() {
   })
   console.log(data);
 
+  if (isPending) {
+    return <span>Loading...</span>
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>
+  }
+
+
   return (
     <div className="card">
-      <nav></nav>  
+      <nav className='bg-cyan-950	'>Wellness Retreat</nav> 
+      <Button>Working</Button> 
     </div>
   )
 }
