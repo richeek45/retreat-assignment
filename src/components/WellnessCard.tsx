@@ -34,19 +34,6 @@ export interface RetreatCard {
 
 const WellnessCard = ({ card } : { card: RetreatCard }) => {
 
-  // const { isPending, isError, data, error } = useQuery({
-  //   queryKey: ["retreat"],
-  //   queryFn: () => getRetreatById(id)
-  // })
-
-  // if (isPending) {
-  //   return <span>Loading...</span>
-  // }
-
-  // if (isError) {
-  //   return <span>Error: {error.message}</span>
-  // }
-
   console.log(card);
 
   return (
@@ -58,7 +45,7 @@ const WellnessCard = ({ card } : { card: RetreatCard }) => {
         <CardTitle className="px-[5%]">
           {card.title}
         </CardTitle>
-        <CardDescription className="px-[5%] py-2">
+        <CardDescription className="px-[5%] py-2 h-10">
           {card.description}
         </CardDescription>
       </CardHeader>
@@ -66,6 +53,11 @@ const WellnessCard = ({ card } : { card: RetreatCard }) => {
         <p>Location: {card.location}</p>
         <p>Date: {new Date(card.date).toDateString()}</p>
         <p>Price: {card.price}</p>
+        <div className="px-6 pt-4 pb-2">
+          {card.tag.map(t => (
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{t}</span>
+          ))}
+        </div>
       </CardContent>
     </Card>
   )
