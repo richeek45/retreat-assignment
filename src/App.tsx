@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const getRetreats = async (page: number, limit: number) => {
   const response = await fetch(`https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats?page=${page}&limit=${limit}`);
+  console.log(page);
   if (!response.ok) {
     throw new Error('Network response was not ok')
   }
@@ -21,7 +22,7 @@ function App() {
   const [page, setPage] = useState(1);
 
   const { isPending, isError, data, error } = useQuery({ 
-    queryKey: ['todos'], 
+    queryKey: ['todos', {page}], 
     queryFn: async () => await getRetreats(page, 6) 
   })
   console.log(data);
@@ -41,8 +42,10 @@ function App() {
       <div className='flex justify-center flex-wrap gap-10 w-full items-center py-2 lg:px-1 my-10'>
         {data.map((card: RetreatCard) => <WellnessCard key={card.id} card={card} />)}
       </div>
-      <Button>Previous</Button>
-      <Button onClick={() => setPage(prev => prev + 1)}>Next</Button>
+      <div className='flex gap-2 justify-center py-10'>
+        <Button disabled={page === 1} onClick={() => setPage(prev => prev - 1)}>Previous</Button>
+        <Button onClick={() => setPage(prev => prev + 1)}>Next</Button>
+      </div>
     </div>
   )
 }
