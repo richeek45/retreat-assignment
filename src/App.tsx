@@ -3,12 +3,15 @@ import { Button } from "@/components/ui/button"
 import WellnessCard, { RetreatCard } from './components/WellnessCard';
 import { useState } from 'react';
 import SelectFilter from './components/SelectFilter';
+import { Input } from "@/components/ui/input"
+import { Search } from 'lucide-react';
+
 
 const getRetreats = async ({
-    page, limit, search, location, filter, tag
+    page, limit, search, location, tag
   } 
   : {
-    page: number, limit: number, search: string, location: string, filter: string, tag: string
+    page: number, limit: number, search: string, location: string, tag: string
   }) => {
   let searchParameters = ``;
 
@@ -18,9 +21,9 @@ const getRetreats = async ({
   if (location) {
     searchParameters += `&location=${location}`;
   }
-  if (filter) {
-    searchParameters += `&filter=${filter}`;
-  }
+  // if (filter) {
+  //   searchParameters += `&filter=${filter}`;
+  // }
   if (tag) {
     searchParameters += `&filter=${tag}`;
   }
@@ -60,40 +63,58 @@ const tags = [
 
 function App() {
   // https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats/
-  // https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats?search=Wellness
 
   const [page, setPage] = useState(1);
   const [type, setType] = useState('');
   const [tag, setTag] = useState('');
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('');
+  const [searched, setSearched] = useState(false);
   const [location, setLocation] = useState('');
 
 
-  const { isPending, isError, data, error } = useQuery({ 
-    queryKey: ['retreat', {page, location, filter, search, tag}], 
-    queryFn: async () => await getRetreats({page, limit: 6, search, filter, location, tag }) 
+  const { isPending, isError, data: data1, error } = useQuery({ 
+    queryKey: ['retreat', {page, location, tag}], 
+    queryFn: async () => { 
+      const res = await getRetreats({page, limit: 6, search, location, tag });
+      setSearched(false);
+      return res;
+    },
+    enabled: !searched
   })
-  console.log(data);
+  const { isPending: isPending2, isError: isError2, data: data2, error: error2 } = useQuery({ 
+    queryKey: ['retreat2', { searched }], 
+    queryFn: async () => { 
+      const res = await getRetreats({page, limit: 6, search, location, tag });
+      setSearched(false);
+      return res;
+    },
+    enabled: searched
+  })
+  const data = data2 || data1;
 
-  if (isPending) {
+  if (isPending && isPending2) {
     return <span>Loading...</span>
   }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>
+  if (isError || isError2) {
+    return <span>Error: {(error || error2)?.message}</span>
   }
 
 
   return (
     <div className="card">
       <nav className='bg-cyan-950	p-2 px-10 text-white rounded'>Wellness Retreat</nav> 
-      <div className='flex gap-10 py-10 px-5 w-[50%]'>
-        <SelectFilter type='type' selectData={types} value={type}  setSelectData={setType}/>
-        <SelectFilter type='tags' selectData={tags} value={tag}  setSelectData={setTag}/>
-        <SelectFilter type='location' selectData={locations} value={location} setSelectData={setLocation}/>
+      <div className='flex justify-between gap-10 py-10 px-5'>
+        <div className='flex gap-10 flex-grow'>
+          <SelectFilter type='type' selectData={types} value={type}  setSelectData={setType}/>
+          <SelectFilter type='tags' selectData={tags} value={tag}  setSelectData={setTag}/>
+          <SelectFilter type='location' selectData={locations} value={location} setSelectData={setLocation}/>
+        </div>
+        <Input className='w-[40%]' type="text" placeholder="Search ..." value={search} onChange={(e) => setSearch(e.target.value)} />
+        <Button onClick={() => setSearched(true)}>
+          <Search />
+        </Button>
       </div>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} />
       <div className='flex justify-center flex-wrap gap-10 w-full items-center py-2 lg:px-1 my-10'>
         {data.map((card: RetreatCard) => <WellnessCard key={card.id} card={card} />)}
       </div>
