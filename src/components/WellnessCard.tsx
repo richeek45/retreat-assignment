@@ -31,7 +31,7 @@ const WellnessCard = ({ card } : { card: RetreatCard }) => {
         <CardTitle className="px-[5%] xl:h-20 py-2 xl:py-5">
           {card.title}
         </CardTitle>
-        <CardDescription className="px-[5%] py-2">
+        <CardDescription className="px-[5%] py-2 h-10">
           {card.description}
         </CardDescription>
       </CardHeader>

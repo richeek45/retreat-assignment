@@ -13,7 +13,8 @@ Filtering, searching and pagination based on query parameters with responsive de
 ### Dependencies
 
 * Reactjs as UI library
-* Redux as state management library
+* Redux as state management library 
+* React Query for fetching data - pagination, search, filters 
 * shadcn/ui for building component blocks
 * styled with Tailwindcss
 * Vite as build tool

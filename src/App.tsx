@@ -75,8 +75,8 @@ function App() {
           <SelectFilter type='location' selectData={locations} value={location} setSelectData={setLocation}/>
           <Button onClick={handleClearFilters}>Clear Button</Button>
         </div>
-        <div className="flex gap-5 h-full">
-          <Input className='w-full xl:w-[40%]' type="text" placeholder="Search retreats by title..." value={search} onChange={(e) => dispatch(setSearch(e.target.value))} />
+        <div className="flex gap-5 h-full basis-1/3">
+          <Input className='w-full xl:w-full' type="text" placeholder="Search retreats by title..." value={search} onChange={(e) => dispatch(setSearch(e.target.value))} />
           <Button onClick={() => dispatch(setSearched(true))}>
             <Search />
           </Button>
