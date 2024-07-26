@@ -8,11 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useAppDispatch } from "@/redux/store";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
-const SelectFilter = ({ type, value, selectData, setSelectData } : { type: string, value: string, selectData: string[], setSelectData: (val: string) => void}) => {
+const SelectFilter = ({ type, value, selectData, setSelectData } : { type: string, value: string, selectData: string[], setSelectData: ActionCreatorWithPayload<string, string>}) => {
+  const dispatch = useAppDispatch();
 
   return (
-    <Select value={value} onValueChange={value => setSelectData(value)}>
+    <Select value={value} onValueChange={value => dispatch(setSelectData(value))}>
       <SelectTrigger className="">
         <SelectValue placeholder={`Filter by ${type}`} />
       </SelectTrigger>
