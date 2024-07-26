@@ -24,6 +24,7 @@ Filtering, searching and pagination based on query parameters with responsive de
 * Open `http://localhost:5173`
 
 
-## Author
+## Contact
 
-Richeek [@Richeek45](https://x.com/Richeek45)
+Name: [Richeek](https://www.linkedin.com/in/richeek-debnath-898b79193/)
+[@Richeek45](https://x.com/Richeek45)
