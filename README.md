@@ -8,7 +8,7 @@ Filtering, searching and pagination based on query parameters with responsive de
 
 ## Deployed in Vercel
 
-[View](https://retreat-assignment.vercel.app/)
+[Wellness Retreat](https://retreat-assignment.vercel.app/)
 
 ### Dependencies
 
