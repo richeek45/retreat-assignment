@@ -18,19 +18,15 @@ const CardsFilter = () => {
 
 
   const { isPending, isError, data: data1, error } = useQuery({ 
-    queryKey: ['retreat', {page, location, tag, type}], 
-    queryFn: async () => { 
-      const res = await getRetreats({page, limit: 6, search, location, tag, type });
-      dispatch(setSearched(false));
-      return res;
-    },
+    queryKey: ['retreat', { page, location, tag, type, searched }], 
+    queryFn: async () => await getRetreats({page, limit: 6, search, location, tag, type }),
     enabled: !searched
   })
   const { isPending: isPending2, isError: isError2, data: data2, error: error2 } = useQuery({ 
     queryKey: ['retreat2', { searched }], 
     queryFn: async () => { 
-      const res = await getRetreats({page, limit: 6, search, location, tag, type });
       dispatch(setSearched(false));
+      const res = await getRetreats({page, limit: 6, search, location, tag, type });
       return res;
     },
     enabled: searched

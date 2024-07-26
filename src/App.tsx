@@ -35,7 +35,6 @@ const tags = [
 ]
 
 function App() {
-  // https://669f704cb132e2c136fdd9a0.mockapi.io/api/v1/retreats/
   const page = useAppSelector((state) => state.filter.page);
   const location = useAppSelector((state) => state.filter.location);
   const tag = useAppSelector((state) => state.filter.tag);
@@ -49,6 +48,7 @@ function App() {
     dispatch(setTag(''));
     dispatch(setSearch(''));
     dispatch(setLocation(''));
+    dispatch(setSearched(false));
   }
 
   return (
