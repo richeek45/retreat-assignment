@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import WellnessCard, { RetreatCard } from "./WellnessCard";
 import { setSearched } from "@/redux/stateSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { Loader } from "lucide-react";
 
 
 
@@ -37,7 +38,7 @@ const CardsFilter = () => {
 
 
   if (isPending && isPending2) {
-    return <span>Loading...</span>
+    return <div className="h-[40vh] m-10 flex justify-center"><Loader className="animate-spin" size={100}/></div>
   }
 
   if (isError || isError2) {

@@ -25,8 +25,8 @@ const WellnessCard = ({ card } : { card: RetreatCard }) => {
   return (
     <Card className="drop-shadow-md border w-[80%] xl:w-[30%] rounded-lg overflow-hidden">
       <CardHeader className="p-0">
-        <div className="h-[300px]">
-          <img src={card.image} alt="card" className="object-cover w-full h-full" />
+        <div className="h-[300px] overflow-hidden">
+          <img src={card.image} alt="card" className="object-cover transition-all duration-500 hover:scale-125 cursor-pointer w-full h-full" />
         </div>
         <CardTitle className="px-[5%] xl:h-20 py-2 xl:py-5">
           {card.title}

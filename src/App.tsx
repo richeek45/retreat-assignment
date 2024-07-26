@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import SelectFilter from './components/SelectFilter';
 import { Input } from "@/components/ui/input"
-import { Search } from 'lucide-react';
+import { Home, Search } from 'lucide-react';
 import {
   Card,
   CardDescription,
@@ -53,7 +53,10 @@ function App() {
 
   return (
     <div>
-      <nav className='bg-cyan-950	p-2 px-10 text-white rounded'>Wellness Retreat</nav> 
+      <nav className='flex gap-5 items-center bg-cyan-950	p-5 text-white rounded uppercase text-lg'>
+        <Home size={40}/> 
+        <p>Wellness Retreat</p>
+        </nav> 
       <Card className="drop-shadow-md border rounded-lg overflow-hidden m-5 hidden xl:block">
         <CardHeader className="p-0">
           <div className='w-full h-80 p-5'>
