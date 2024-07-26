@@ -26,5 +26,4 @@ Filtering, searching and pagination based on query parameters with responsive de
 
 ## Author
 
-ex. Richeek
-ex. [@Richeek45](https://x.com/Richeek45)
+Richeek [@Richeek45](https://x.com/Richeek45)
