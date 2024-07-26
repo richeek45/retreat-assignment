@@ -52,9 +52,9 @@ function App() {
   }
 
   return (
-    <div className="card">
+    <div>
       <nav className='bg-cyan-950	p-2 px-10 text-white rounded'>Wellness Retreat</nav> 
-      <Card className="drop-shadow-md border rounded-lg overflow-hidden m-5">
+      <Card className="drop-shadow-md border rounded-lg overflow-hidden m-5 hidden xl:block">
         <CardHeader className="p-0">
           <div className='w-full h-80 p-5'>
             <img className='object-cover h-full w-full' src="wellness.jpg" alt="" />
@@ -68,17 +68,19 @@ function App() {
         </CardHeader>
       </Card>
 
-      <div className='flex justify-between gap-10 py-10 px-5'>
-        <div className='flex gap-10 flex-grow'>
+      <div className='flex flex-col xl:flex-row justify-between gap-10 py-10 px-10 xl:px-5'>
+        <div className='flex flex-col xl:flex-row gap-10 flex-grow'>
           <SelectFilter type='type' selectData={types} value={type}  setSelectData={setType}/>
           <SelectFilter type='tags' selectData={tags} value={tag}  setSelectData={setTag}/>
           <SelectFilter type='location' selectData={locations} value={location} setSelectData={setLocation}/>
           <Button onClick={handleClearFilters}>Clear Button</Button>
         </div>
-        <Input className='w-[40%]' type="text" placeholder="Search ..." value={search} onChange={(e) => dispatch(setSearch(e.target.value))} />
-        <Button onClick={() => dispatch(setSearched(true))}>
-          <Search />
-        </Button>
+        <div className="flex gap-5 h-full">
+          <Input className='w-full xl:w-[40%]' type="text" placeholder="Search retreats by title..." value={search} onChange={(e) => dispatch(setSearch(e.target.value))} />
+          <Button onClick={() => dispatch(setSearched(true))}>
+            <Search />
+          </Button>
+        </div>
       </div>
       <CardsFilter />
       <div className='flex gap-2 justify-center py-10'>

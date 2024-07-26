@@ -45,7 +45,7 @@ const CardsFilter = () => {
   }
 
 
-  return (<div className='flex justify-center flex-wrap gap-10 w-full items-center py-2 lg:px-1 my-10'>
+  return (<div className='flex justify-center flex-wrap gap-10 w-full items-start h-full py-2 lg:px-1 my-10'>
     {data.map((card: RetreatCard) => <WellnessCard key={card.id} card={card} />)}
   </div>)
 }
